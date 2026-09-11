@@ -10,33 +10,115 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CorporateEventsRouteImport } from './routes/corporate-events'
+import { Route as LuxuryWeddingsRouteImport } from './routes/luxury-weddings'
+import { Route as MethodologyRouteImport } from './routes/methodology'
+import { Route as PortfolioRouteImport } from './routes/portfolio'
+import { Route as VenuesProductionRouteImport } from './routes/venues-production'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CorporateEventsRoute = CorporateEventsRouteImport.update({
+  id: '/corporate-events',
+  path: '/corporate-events',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LuxuryWeddingsRoute = LuxuryWeddingsRouteImport.update({
+  id: '/luxury-weddings',
+  path: '/luxury-weddings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MethodologyRoute = MethodologyRouteImport.update({
+  id: '/methodology',
+  path: '/methodology',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PortfolioRoute = PortfolioRouteImport.update({
+  id: '/portfolio',
+  path: '/portfolio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VenuesProductionRoute = VenuesProductionRouteImport.update({
+  id: '/venues-production',
+  path: '/venues-production',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/contact': typeof ContactRoute
+  '/corporate-events': typeof CorporateEventsRoute
+  '/luxury-weddings': typeof LuxuryWeddingsRoute
+  '/methodology': typeof MethodologyRoute
+  '/portfolio': typeof PortfolioRoute
+  '/venues-production': typeof VenuesProductionRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/contact': typeof ContactRoute
+  '/corporate-events': typeof CorporateEventsRoute
+  '/luxury-weddings': typeof LuxuryWeddingsRoute
+  '/methodology': typeof MethodologyRoute
+  '/portfolio': typeof PortfolioRoute
+  '/venues-production': typeof VenuesProductionRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/contact': typeof ContactRoute
+  '/corporate-events': typeof CorporateEventsRoute
+  '/luxury-weddings': typeof LuxuryWeddingsRoute
+  '/methodology': typeof MethodologyRoute
+  '/portfolio': typeof PortfolioRoute
+  '/venues-production': typeof VenuesProductionRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/contact'
+    | '/corporate-events'
+    | '/luxury-weddings'
+    | '/methodology'
+    | '/portfolio'
+    | '/venues-production'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/contact'
+    | '/corporate-events'
+    | '/luxury-weddings'
+    | '/methodology'
+    | '/portfolio'
+    | '/venues-production'
+  id:
+    | '__root__'
+    | '/'
+    | '/contact'
+    | '/corporate-events'
+    | '/luxury-weddings'
+    | '/methodology'
+    | '/portfolio'
+    | '/venues-production'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ContactRoute: typeof ContactRoute
+  CorporateEventsRoute: typeof CorporateEventsRoute
+  LuxuryWeddingsRoute: typeof LuxuryWeddingsRoute
+  MethodologyRoute: typeof MethodologyRoute
+  PortfolioRoute: typeof PortfolioRoute
+  VenuesProductionRoute: typeof VenuesProductionRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +130,59 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/corporate-events': {
+      id: '/corporate-events'
+      path: '/corporate-events'
+      fullPath: '/corporate-events'
+      preLoaderRoute: typeof CorporateEventsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/luxury-weddings': {
+      id: '/luxury-weddings'
+      path: '/luxury-weddings'
+      fullPath: '/luxury-weddings'
+      preLoaderRoute: typeof LuxuryWeddingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/methodology': {
+      id: '/methodology'
+      path: '/methodology'
+      fullPath: '/methodology'
+      preLoaderRoute: typeof MethodologyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/portfolio': {
+      id: '/portfolio'
+      path: '/portfolio'
+      fullPath: '/portfolio'
+      preLoaderRoute: typeof PortfolioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/venues-production': {
+      id: '/venues-production'
+      path: '/venues-production'
+      fullPath: '/venues-production'
+      preLoaderRoute: typeof VenuesProductionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ContactRoute: ContactRoute,
+  CorporateEventsRoute: CorporateEventsRoute,
+  LuxuryWeddingsRoute: LuxuryWeddingsRoute,
+  MethodologyRoute: MethodologyRoute,
+  PortfolioRoute: PortfolioRoute,
+  VenuesProductionRoute: VenuesProductionRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
