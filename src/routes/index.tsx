@@ -1,24 +1,21 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight, ChevronRight } from "lucide-react";
+import { useInquiry } from "@/components/site-shell";
+import { Chapter, InquiryBand } from "@/components/page-kit";
+import { cases, images, pillars } from "@/lib/avera-data";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
-export const Route = createFileRoute("/")({
-  component: Index,
-});
+export const Route=createFileRoute("/")({head:()=>({meta:[{title:"AVERA — Corporate Event House Cairo"},{name:"description",content:"AVERA creates, designs and delivers memorable corporate events and bespoke luxury weddings in Egypt."},{property:"og:title",content:"AVERA Corporate Event House"},{property:"og:description",content:"Strategy, design and turnkey event execution in Cairo, Egypt."},{property:"og:type",content:"website"},{name:"twitter:card",content:"summary_large_image"}]}),component:Home});
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
-}
+function Home(){const open=useInquiry();return <>
+ <main>
+  <section className="mx-auto grid max-w-[1440px] items-center gap-10 px-5 py-12 lg:grid-cols-12 lg:px-12 lg:py-20">
+   <div className="lg:col-span-6"><p className="mb-5 inline-flex rounded-full border border-border bg-card px-3 py-2 text-[10px] font-semibold uppercase text-ochre">Corporate Event House — Strategy → Design → Execution</p><h1 className="max-w-3xl text-4xl font-semibold leading-tight md:text-6xl">We Create, Design, and Deliver Memorable Corporate Events From Concept to Execution.</h1><p className="mt-6 max-w-xl text-base leading-relaxed text-mocha">For corporates, global brands, government entities and enterprise organizations—with a private division for bespoke luxury weddings.</p><p className="mt-4 text-xs font-semibold uppercase text-warmgray">Corporates · Global Brands · Government Entities · Enterprise Organizations</p><div className="mt-8 flex flex-wrap gap-3"><button onClick={()=>open("corporate")} className="rounded-md bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground">Plan a Corporate Event</button><Link to="/luxury-weddings" className="rounded-md border border-border bg-card px-5 py-3 text-sm font-semibold">Luxury Weddings & Private Galas</Link></div>
+   </div><div className="relative lg:col-span-6"><img src={images.hero} width={1536} height={1024} alt="AVERA corporate gala with panoramic LED stage and crystal chandeliers" className="aspect-[4/3] w-full rounded-lg object-cover"/><div className="absolute inset-x-4 bottom-4 flex items-center justify-between rounded-md bg-sand/95 p-4 backdrop-blur"><span className="text-xs font-semibold">Flagship corporate production · Cairo</span><span className="text-[10px] uppercase text-warmgray">AVERA</span></div></div>
+  </section>
+  <section className="overflow-hidden border-y border-border bg-card py-6"><p className="mx-auto mb-4 max-w-[1440px] px-5 text-[10px] font-semibold uppercase text-warmgray lg:px-12">Verified client ecosystem</p><div className="flex w-max animate-marquee items-center gap-12 whitespace-nowrap text-lg font-semibold text-mocha">{[...Array(2)].flatMap(()=>["Mercedes-Benz","AXA","UNIVAL","Red Sea Hotels","Pyramids Developments","Onyx Real Estate","VAN-TEC","وزارة العمل","حزب حماة الوطن"]).map((x,i)=><span key={`${x}${i}`} className="flex items-center gap-12">{x}<span className="text-camel">·</span></span>)}</div></section>
+  <Chapter number="02" label="The House" title="Three disciplines. One accountable team."><div className="grid gap-5 md:grid-cols-3">{pillars.map(p=><article key={p.n} className="rounded-lg bg-card p-7 shadow-sm"><p className="text-xs font-semibold text-ochre">{p.n}</p><h3 className="mt-4 text-2xl font-semibold">{p.title}</h3><p className="mt-3 text-sm leading-relaxed text-warmgray">{p.copy}</p></article>)}</div></Chapter>
+  <Chapter number="03" label="Flagship Study" title="UNIVAL — blueprint to reality"><div className="grid gap-5 md:grid-cols-2"><img loading="lazy" src={images.blueprint} width={1280} height={900} alt="Technical event floor plan" className="aspect-[5/4] w-full rounded-lg object-cover"/><img loading="lazy" src={images.hero} width={1536} height={1024} alt="Completed UNIVAL event production" className="aspect-[5/4] w-full rounded-lg object-cover"/></div><div className="mt-6 flex flex-col justify-between gap-5 md:flex-row"><p className="max-w-2xl text-sm leading-relaxed text-warmgray">Custom curved LED staging, full lighting rig, branded tablescapes, blue ambient light, crystal chandeliers and live entertainment coordination featuring leading stars.</p><Link to="/portfolio" className="inline-flex items-center gap-2 text-sm font-semibold text-ochre">Explore all case studies<ArrowRight className="size-4"/></Link></div></Chapter>
+  <Chapter number="04" label="Selected Work" title="A portfolio built in real rooms"><div className="grid gap-7 md:grid-cols-2 lg:grid-cols-3">{cases.slice(1,4).map(c=><article key={c.title}><img loading="lazy" src={c.image} width={1280} height={900} alt={c.title} className="aspect-[4/3] w-full rounded-lg object-cover"/><p className="mt-4 text-[10px] font-semibold uppercase text-ochre">{c.tag}</p><h3 className="mt-2 text-xl font-semibold">{c.title}</h3><p className="mt-2 text-sm leading-relaxed text-warmgray">{c.copy}</p></article>)}</div></Chapter>
+  <Chapter number="05" label="Our Process" title="Discover. Plan. Create. Deliver."><div className="grid gap-px overflow-hidden rounded-lg border border-border bg-border md:grid-cols-4">{[["01","Discover"],["02","Plan"],["03","Create"],["04","Deliver"]].map(s=><div key={s[0]} className="bg-card p-6"><p className="text-xs text-ochre">{s[0]}</p><h3 className="mt-3 text-xl font-semibold">{s[1]}</h3></div>)}</div></Chapter>
+  <section className="mx-auto grid max-w-[1440px] items-center gap-10 border-t border-border px-5 py-16 lg:grid-cols-12 lg:px-12 lg:py-24"><img loading="lazy" src={images.wedding} width={1200} height={1504} alt="Bespoke wedding by AVERA" className="aspect-[3/4] w-full rounded-lg object-cover lg:col-span-5"/><div className="lg:col-span-7"><p className="text-[11px] font-semibold uppercase text-ochre">Bespoke Weddings by AVERA</p><h2 className="mt-4 max-w-2xl text-3xl font-semibold md:text-5xl">Corporate precision. A deeply personal celebration.</h2><p className="mt-5 max-w-xl text-base leading-relaxed text-warmgray">Architectural artistry, zero-delay execution and total vendor management for a once-in-a-lifetime day.</p><div className="mt-7 flex gap-3"><button onClick={()=>open("wedding")} className="rounded-md bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground">Wedding Consultation</button><Link to="/luxury-weddings" className="inline-flex items-center gap-1 px-3 py-3 text-sm font-semibold">Explore the journey<ChevronRight className="size-4"/></Link></div></div></section>
+ </main><InquiryBand/></>}
